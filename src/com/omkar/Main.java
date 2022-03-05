@@ -118,6 +118,9 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
+        System.out.println("Press any key to exit");
+        Scanner sc=new Scanner(System.in);
+        sc.nextLine().isEmpty();
     }
     public static String askTransmissionType(){
         Scanner sc= new Scanner(System.in);
