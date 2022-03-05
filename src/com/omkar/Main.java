@@ -1,6 +1,7 @@
 package com.omkar;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -16,6 +17,17 @@ public class Main {
             try{
                 skr=new SocketRecv();
                 String[] address=skr.getHostAddress();
+                System.out.println("Enter the destination directory path: (default is /Downloads/, enter -d)");
+                Scanner sc= new Scanner(System.in);
+                String path=sc.nextLine();
+                if(!path.equals("-d")){
+                    path=sc.nextLine();
+                    while( !new File(path).exists() || !new File(path).isDirectory()){
+                        System.out.println("Enter a valid directory!");
+                        path=sc.nextLine();
+                    }
+                }
+                else path=Paths.get(System.getProperty("user.home"),"Downloads").toString();
                 System.out.println("IP: "+address[0]);
                 System.out.println("Port: "+address[1]);
                 skr.accept();
@@ -23,7 +35,6 @@ public class Main {
                 String filename=skr.getDataInputStream().readUTF();
                 String fileSize=skr.getDataInputStream().readUTF();
                 System.out.println("Receiving: "+filename+" | "+fileSize+" MB");
-                String path=System.getProperty("user.home")+"//Downloads";
                 File file=new File(path,filename);
                 FileOutputStream fileOutputStream=new FileOutputStream(file);
                 int bytesReceived;
@@ -49,11 +60,11 @@ public class Main {
                 System.out.print("\n");
                 fileOutputStream.close();
                 skr.close();
+                System.out.println("File saved at "+path);
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println(e.getMessage());
             }
-            System.out.println("File received.");
         }
 
         else{
@@ -101,11 +112,11 @@ public class Main {
                 printProgress((float)totalBytes,(float) totalBytes,numDigits);
                 System.out.print("\n");
                 sks.close();
+                System.out.println("File sent.");
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println(e.getMessage());
             }
-            System.out.println("File sent.");
         }
     }
     public static String askTransmissionType(){
