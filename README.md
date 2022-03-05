@@ -6,3 +6,7 @@ A command line app to share files locally (PC/Android). In case of transfer to/f
 
 
 ![Screenshot 2022-03-05 235005](https://user-images.githubusercontent.com/78973793/156895525-6e69ab20-826b-4b90-832e-547ee923d9e2.jpg)
+
+Android view: (in case of PC-Android transfer)
+
+![Screenshot (356)](https://user-images.githubusercontent.com/78973793/156895607-95556cb5-9e40-4712-bfec-b4a3c137fc16.png)
